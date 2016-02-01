@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!--
+    The database scripts are stored in the db folder.
+    The java source code is stored in the src folder.
+    The images, js, META-INF, styles (css) are stored in the war folder.
+    The JSPs are stored in the jsp folder.
+    The third party jar files are stored in the lib folder.
+    The java class files are stored in the WEB-INF\classes folder.
+-->
+<project name="ModHuntersUK" basedir="." default="build">
+	<property name="src.dir" value="src" />
+	<property name="web.dir" value="WebContent" />
+	<property name="build.dir" value="${web.dir}/WEB-INF" />
+	<property name="lib.dir" value="lib" />
+	<property name="name" value="ModHuntersUK" />
+
+	<path id="master-classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement path="${build.dir}" />
+	</path>
+
+	<target name="build" description="Compile source tree java files" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<javac destdir="${build.dir}/classes" source="1.8" target="1.8">
+			<src path="${src.dir}" />
+			<classpath refid="master-classpath" />
+		</javac>
+	</target>
+
+	<target name="clean" description="Clean output directories">
+		<delete>
+			<fileset dir="${build.dir}/classes">
+				<include name="**/*.class" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="build-jar" depends="build">
+		<jar destfile="${web.dir}/export/modHuntersUK.jar" basedir="${src.dir}" includes="com/modhuntersuk/**" excludes="**/Test.class">
+		</jar>
+	</target>
+
+	<target name="build-war" depends="build">
+		<war destfile="modHuntersUK.war" webxml="${build.dir}/web.xml">
+			<fileset dir="${web.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<classes dir="${build.dir}/classes" />
+		</war>
+	</target>
+
+
+</project>
