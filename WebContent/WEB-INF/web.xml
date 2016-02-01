@@ -6,7 +6,7 @@ id="WebApp_ID" version="3.0">
     
   <servlet>  
   <servlet-name>s1</servlet-name>  
-  <servlet-class>com.modhuntersuk.controller.ModHuntersUkController</servlet-class>  
+  <servlet-class>com.modhutersuk.controller.ModHuntersUkController</servlet-class>  
   </servlet>  
   <servlet-mapping>  
   <servlet-name>s1</servlet-name>  
