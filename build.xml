@@ -23,7 +23,7 @@
 	</path>
 
 	<target name="build" description="Compile source tree java files" depends="clean">
-		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/classes" />
 		<javac destdir="${build.dir}/classes" source="1.8" target="1.8">
 			<src path="${src.dir}" />
 			<classpath refid="master-classpath" />
@@ -31,6 +31,7 @@
 	</target>
 
 	<target name="clean" description="Clean output directories">
+		<mkdir dir="${build.dir}/classes" />
 		<delete>
 			<fileset dir="${build.dir}/classes">
 				<include name="**/*.class" />
